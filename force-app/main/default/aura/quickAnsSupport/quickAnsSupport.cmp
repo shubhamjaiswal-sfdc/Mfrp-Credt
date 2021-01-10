@@ -1,0 +1,59 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    <aura:attribute name="first" type="boolean" default="false" />
+    <aura:attribute name="second" type="boolean" default="false" />
+    <aura:attribute name="third" type="boolean" default="false" />
+    <aura:attribute name="fourth" type="boolean" default="false" />
+    <aura:attribute name="fifth" type="boolean" default="false" />
+    <aura:attribute name="sixth" type="boolean" default="false" />
+    <aura:attribute name="seventh" type="boolean" default="false" />
+    
+    <lightning:card class="slds-m-around_medium" title="Quick Answers for Your Queries" iconName="standard:question_feed">
+        <div class="slds-p-around_large">
+            <ul style="list-style-type:circle">
+                <li><a onclick="{!c.firstjs}">What card benefits and insurance are provided at no cost to me with my Credit Card?</a></li>
+                <aura:if isTrue="{!v.first}">
+                	<p class="slds-p-around_x-small slds-m-bottom_medium">
+                    	Credit Cards provides many different features and benefits that vary depending on the specific card you use. 
+                        To learn more about your card benefits, please contact your issuing bank.
+                    </p>
+                </aura:if>
+                <li><a onclick="{!c.secondjs}"> How can I find out more about my card benefits</a></li>
+                 <aura:if isTrue="{!v.second}">
+                	<p class="slds-p-around_x-small slds-m-bottom_medium">
+                    	CREDT provides many different features and benefits that differ depending on the specific card that you have. To find out the benefits offered by your card, please contact your issuing bank.
+                    </p>
+                </aura:if>
+                <li><a onclick="{!c.thirdjs}">What is an EMV chip card, and how can this technology help my business?</a></li>
+                <aura:if isTrue="{!v.third}">
+                	<p class="slds-p-around_x-small slds-m-bottom_medium">
+                    	The EMV chip card is a card embedded with a computer chip. They are simple to use and accept, and give cardholders increased convenience and security. These cards can even keep track of purchases, offering retailers and service providers marketing opportunities.
+                    </p>
+                </aura:if>
+                <li><a onclick="{!c.fourthjs}">How can I get a replacement card?</a></li>
+                <aura:if isTrue="{!v.fourth}">
+                	<p class="slds-p-around_x-small slds-m-bottom_medium">
+                    	Please contact your financial institution that issued your card to arrange a replacement card.
+                    </p>
+                </aura:if>
+                <li><a onclick="{!c.fifthjs}">I received an email/phone call from Mastercard about my account but it appears to be a scam or a phishing email. What should I do?</a></li>
+                <aura:if isTrue="{!v.fifth}">
+                	<p class="slds-p-around_x-small slds-m-bottom_medium">
+                    	CREDT will never solicit personal or account information from a cardholder and we suspect that the information you received is fraudulent. Consumers should always safeguard their personal information and refrain from responding to suspicious email/phone scams. If you suspect fraud on your account, please contact your issuing bank immediately to report it. 
+                    </p>
+                </aura:if>
+                <li><a onclick="{!c.sixthjs}">I believe someone has applied for a credit card in my name. What should I do?</a></li>
+                <aura:if isTrue="{!v.sixth}">
+                	<p class="slds-p-around_x-small slds-m-bottom_medium">
+                    	CREDT does not issue cards and we can't tell you if an account has been opened in your name. If you know the name of the financial institution, you should contact them immediately and cancel the account.
+                    </p>
+                </aura:if>
+                <li><a onclick="{!c.seventhjs}">How do I report potential fraud?</a></li>
+                <aura:if isTrue="{!v.seventh}">
+                	<p class="slds-p-around_x-small slds-m-bottom_medium">
+                    	If you possess contact information for someone who has committed fraud on a CREDT account, please contact your merchant service provider for assistance in reaching the financial institution that issued the CREDT account.
+                    </p>
+                </aura:if>
+            </ul>
+        </div>
+    </lightning:card>
+</aura:component>

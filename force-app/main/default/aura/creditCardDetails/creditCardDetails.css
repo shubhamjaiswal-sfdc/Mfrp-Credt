@@ -1,0 +1,27 @@
+.THIS table {  
+    color: #333;
+    font-family: sans-serif;
+    border-collapse: collapse; 
+    font-size: 0.9em;
+}
+
+.THIS td, .THIS th {  
+   padding: 12px;
+    transition: all 0.3s;
+}
+
+.THIS th {  
+    background: #DFDFDF;
+    font-weight: bold;
+    text-align: center;
+}
+
+.THIS td {  
+    background: #FAFAFA;
+    text-align: center;
+}
+
+.THIS tr td:hover { 
+    background: #666; 
+    color: white; 
+}

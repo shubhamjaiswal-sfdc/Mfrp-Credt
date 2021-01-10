@@ -1,0 +1,48 @@
+<aura:component implements="flexipage:availableForAllPageTypes,force:hasRecordId,forceCommunity:availableForAllPageTypes" access="global">
+    <aura:attribute name="product" type="Product2" default="{'sObjectType':'Product2'}"/>
+    <aura:registerEvent name="bookProduct" type="c:fetchProductId"/>
+    
+    <div class="slds-card">
+        <div class="slds-grid slds-wrap prod">
+            <div class="slds-col slds-medium-size_3-of-12 ">
+                <div class="slds-clearfix slds-p-around_small">
+                    <img src="{!v.product.DisplayUrl}" class="avatarCustom"/>
+                </div>
+            </div>
+            <div class="slds-col slds-medium-size_6-of-12">
+                <a onclick="{!c.navigate}"><h3 class="slds-text-heading_small slds-m-bottom_xx-small">{!v.product.Name}</h3></a>
+                <div class="features">
+                    <div class="feature">
+                        <span class="slds-m-right_x-small">
+                            <img src="https://www.flaticon.com/svg/static/icons/svg/3728/3728878.svg"
+                                 class="svgcustom" />
+                        </span>
+                        <span>
+                            {!v.product.ProductCode}
+                        </span>
+                    </div>
+                    <div class="feature">
+                        <span class="slds-m-right_x-small">
+                            <img src="https://www.flaticon.com/svg/static/icons/svg/3843/3843517.svg"
+                                 class="svgcustom" />
+                        </span>
+                        <span>
+                            {!v.product.Family}
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="slds-col slds-medium-size_3-of-12 slds-p-around_small">
+                <div class="prod-amount slds-p-top_medium">
+                    <div class="price">
+                        <sup class="rupee">*</sup>
+                        <lightning:formattedNumber style="currency" value="{!v.product.Price__c}" minimumFractionDigits="2" maximumFractionDigits="2"/>
+                    </div>
+                </div>
+                <div class="slds-align_absolute-center slds-p-top_medium">
+                    <lightning:button iconName="utility:cart" label="Order" variant="inverse" class="button-card" onclick="{!c.orderProduct}" />
+                </div>
+            </div>
+        </div>
+    </div>
+</aura:component>

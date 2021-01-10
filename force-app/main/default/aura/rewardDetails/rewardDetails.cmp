@@ -1,0 +1,40 @@
+<aura:component implements="flexipage:availableForAllPageTypes,force:hasRecordId,force:lightningQuickAction,forceCommunity:availableForAllPageTypes" access="global" controller="ProdAndTransController">
+    <aura:attribute name="contactID" type="Id"/>
+    <aura:attribute name="rewards" type="Reward__c[]"/>
+    
+    <aura:handler name="init" value="this" action="{!c.doInit}"/>
+    
+    <lightning:card title="Reward Details" iconName="standard:reward" class="slds-m-top_large">
+        <div class="slds-p-around_x-small slds-wrap" style=" position: relative;">
+            <div class="slds-col slds-size_12-of-12 scrollable-view slds-p-bottom_medium">                     
+                <table class="styled-table">
+                    <thead>
+                        <tr>
+                            <th>Reward ID.</th>
+                            <th>Coupon Code</th>
+                            <th>CREDT Points</th>
+                            <th>Redeemed On</th>
+                        </tr>
+                    </thead>
+                    <aura:if isTrue="{!v.rewards}">
+                        <aura:iteration items="{!v.rewards}" var="reward">
+                            <tbody >
+                                <tr>
+                                    <td><a onclick="{!c.navigate}" data-id ="{!reward.Id}">{!reward.Name}</a></td>
+                                    <td><ui:outputText value="********************" title="{!reward.Id}" mouseout="{!c.onMouseOut}" mouseover="{!c.onMouseOver}"/></td>
+                                    <td><lightning:formattedNumber value="{!reward.Price__c}" /></td>
+                                    <td><lightning:formattedDateTime value="{!reward.Redeem_Date_Time__c}" year="numeric" month="numeric" day="numeric" hour="2-digit"
+                                                                     minute="2-digit" timeZoneName="short" hour12="true"/></td>
+                                </tr>
+                            </tbody>
+                        </aura:iteration>
+                        <aura:set attribute="else">
+                            <p>Oopss!!! No Rewards to show.</p>
+                        </aura:set>
+                    </aura:if>
+                </table>
+            </div>
+            <lightning:spinner aura:id="spinner" variant="brand" size="medium"/>
+        </div>
+    </lightning:card>
+</aura:component>

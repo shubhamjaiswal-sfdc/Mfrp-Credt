@@ -1,0 +1,74 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" controller="currentUserInfoApex">
+    
+    <aura:attribute name="isOpen" type="Boolean" default="false"/>
+    <aura:attribute name="transaction" type="Transaction__c" default="{'sObjectType':'Transaction__c'}"/>
+    <aura:attribute name="productId" type="Product2"/>
+    <aura:attribute name="options" type="List" access="PRIVATE"/>
+    <aura:attribute name="selectedValue" type="String" access="PRIVATE"/>
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <ltng:require styles="{!$Resource.multilineToastCSS}" />
+    
+    <div class="slds-m-around_xx-large">
+        <aura:if isTrue="{!v.isOpen}"> 
+            
+            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <header class="slds-modal__header">
+                        <lightning:buttonIcon iconName="utility:close" onclick="{!c.closeModal}" alternativeText="close" variant="bare-inverse" class="slds-modal__close"/>
+                        <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Enter Payment Details for your Product</h2>
+                    </header>
+                    
+                    <lightning:recordEditForm objectApiName="Transaction__c" onsuccess="{!c.confirmPayment}">
+                        <div class="slds-modal__content slds-p-around_large">
+                            <div class="slds-grid slds-wrap slds-p-horizontal--large">
+                                <div class="slds-col slds-small-size_1-of-1 slds-p-top_small">
+                                    <lightning:inputField aura:id="prodField" fieldName="Order_Item__c" disabled="true"/> 
+                                </div>
+                            </div>
+                            <div class="slds-grid slds-wrap slds-p-horizontal--large">
+                                <div class="slds-col slds-medium-size_1-of-3 slds-p-top--xx-small">
+                                    <lightning:inputField aura:id="amountField" fieldName="Amount__c" disabled="true"/>
+                                </div>
+                                <div class="slds-col slds-medium-size_2-of-3 slds-p-top_large">
+                                    <lightning:inputField aura:id="contactField" fieldName="Customer_Name__c" disabled="true"/>
+                                </div>
+                            </div> 
+                            <div class="slds-grid slds-wrap slds-p-horizontal--large">
+                                <div class="slds-col slds-medium-size_1-of-2 slds-p-top_small">
+                                    <lightning:inputField aura:id="cardField" fieldName="Payment_Mode__c" disabled="true" value="{!v.selectedValue}"/> 
+                                </div>
+                                <div class="slds-col slds-medium-size_1-of-2 slds-p-top_small">
+                                    <lightning:select name="paymentId" label="Select a Payment Mode:" aura:id="paymentId" value="{!v.selectedValue}">
+                                        <option text="--NONE--" />
+                                        <aura:iteration items="{!v.options}" var="option">
+                                            <option text="{!option.Name}" value="{!option.Id}" selected="{!option.selected}"/>
+                                        </aura:iteration>
+                                    </lightning:select>
+                                </div>
+                                <div class="slds-col slds-medium-size_1-of-2 slds-p-top_small">
+                                    <lightning:inputField fieldName="Payment_Time__c" disabled="true"/>
+                                </div>
+                                <div class="slds-col slds-medium-size_1-of-2 slds-p-top_small">
+                                    <lightning:inputField fieldName="Transaction_For__c" value="Product" disabled="true"/>
+                                </div>
+                            </div>
+                        </div>  
+                        <!--modal footer-->
+                        <footer class="slds-modal__footer">
+                            <lightning:button variant="neutral" 
+                                              label="Cancel"  
+                                              onclick="{!c.closeModal}"/>
+                            <lightning:button type="submit"
+                                              variant="brand"
+                                              label="Proceed to Pay"/>
+                        </footer>
+                    </lightning:recordEditForm>
+                </div>
+            </section>
+            
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </aura:if>
+    </div>
+    
+</aura:component>

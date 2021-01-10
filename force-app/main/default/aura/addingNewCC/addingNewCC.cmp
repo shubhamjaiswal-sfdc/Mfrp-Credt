@@ -1,0 +1,52 @@
+<aura:component implements="flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" controller="currentUserInfoApex">
+    <aura:attribute name="ownId" type="Id" />
+    <aura:attribute name="visible" type="boolean" default="true" />
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    
+    <lightning:card iconName="action:new_contact" title="Add your Credit Card">
+        <lightning:recordEditForm aura:id="myRecordForm" objectApiName="Credit_Card__c"  onsubmit="{!c.handleSubmit}">
+            <div class="slds-grid">
+                <div class="slds-col slds-p-left_medium slds-size_2-of-5">
+                    <lightning:inputField fieldName="Bank_Name__c" />
+                </div>
+                <div class="slds-col slds-p-around_small slds-size_1-of-5"></div>
+                <div class="slds-col slds-p-right_medium slds-size_2-of-5">
+                    <lightning:inputField fieldName="Card_Holder_Name__c" />
+                </div>
+            </div>
+            <div class="slds-grid">
+                <div class="slds-col slds-p-left_medium slds-size_2-of-5">
+                    <lightning:inputField fieldName="Name" />
+                </div>
+                <div class="slds-col slds-p-around_small slds-size_1-of-5"></div>
+                <div class="slds-col slds-p-right_medium slds-size_2-of-5">
+                    <lightning:inputField fieldName="Card_Number__c" />
+                </div>
+            </div>
+            <div class="slds-grid">
+                <div class="slds-col slds-p-left_medium slds-size_2-of-5">
+                    <lightning:inputField fieldName="CVV__c" />
+                </div>
+                <div class="slds-col slds-p-around_small slds-size_1-of-5"></div>
+                <div class="slds-col slds-p-right_medium slds-size_2-of-5">
+                    <lightning:inputField fieldName="Expiry_Date__c" />
+                </div>
+            </div>
+            <div class="slds-grid">
+                <div class="slds-col slds-p-left_medium slds-size_2-of-5">
+                    <lightning:inputField fieldName="Limit__c" />
+                </div>
+                <div class="slds-col slds-p-around_small slds-size_1-of-5"></div>
+                <div class="slds-col slds-p-right_medium slds-size_2-of-5">
+                    <lightning:inputField fieldName="Remaining_Balance__c" />
+                </div>
+            </div>
+            <div class=" slds-align_absolute-center">
+                <aura:if isTrue="{!v.visible}">
+                    <lightning:button class="slds-m-around_small" type="submit" variant="brand" label="ADD" iconName="utility:new" />
+                </aura:if>
+            </div>
+        </lightning:recordEditForm>
+    </lightning:card>
+</aura:component>

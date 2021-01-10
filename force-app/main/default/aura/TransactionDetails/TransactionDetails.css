@@ -1,0 +1,23 @@
+.THIS .styled-table {
+    border-collapse: collapse;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    box-shadow: 0 0 20px RGBA(0, 0, 0, 0.15);
+}
+.THIS .styled-table thead{
+    background-color: #16325c;
+    color: #ffffff;
+}
+.THIS .styled-table th,
+.THIS .styled-table td {
+    padding: 12px;
+}
+
+.THIS .styled-table tbody {
+    border-bottom: 2px solid #16325c;
+}
+
+.THIS .scrollable-view{
+    overflow-y: auto;
+    max-height: 330px;
+}

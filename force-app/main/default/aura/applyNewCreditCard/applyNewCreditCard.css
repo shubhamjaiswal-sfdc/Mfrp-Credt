@@ -1,0 +1,12 @@
+.THIS {
+    background-color: black;
+    color: #f9f9f9;
+}
+.THIS .customIcon div{
+    vertical-align: top !important;
+    color: black;
+}
+.THIS .box{
+    color: black;
+    background-color: #f7f7f7;
+}

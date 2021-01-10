@@ -1,0 +1,111 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes" access="global" controller="currentUserInfoApex">
+    <aura:attribute name="visible" type="Boolean" default="true" />
+    <aura:attribute name="appName" type="String" />
+    <aura:attribute name="confDate" type="String" />
+    <aura:attribute name="ownId" type="Id" />
+    <aura:attribute name="ownName" type="String" />
+    <aura:attribute name="email" type="String" />
+    <aura:attribute name="mobile" type="String" /> 
+    <aura:attribute name="limit" type="String" />
+    <aura:attribute name="empType" type="String" />
+    <aura:attribute name="returnedValue" type="Id" />
+    <aura:attribute name="filetype" type="List" default="['.png', '.jpg', '.jpeg', '.pdf']" />
+    <aura:attribute name="sObjectName" type="String" default="Opportunity" />
+    <aura:attribute name="recordId" type="String" />
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    
+    <aura:attribute name="pageReference" type="Object"/>
+    <lightning:navigation aura:id="navService"/>
+    
+    <lightning:card iconName="standard:product_request" title="New Credit Card Application">
+        <aura:if isTrue="{!v.visible}">
+            <div class="slds-p-around_medium">
+                <lightning:layout multipleRows="true">
+                    <lightning:layoutItem size="4" class="slds-p-around_medium">
+                        <div class="slds-p-around_large box slds-box" style="background_color: #f7f7f7;"> 
+                            <label class="slds-form-element__label">Application Name</label>
+                            <lightning:helptext content="Purpose of form submission" class="customIcon"/> 
+                            <lightning:input type="text" disabled="true" value="{!v.appName}"/>
+                        </div>
+                    </lightning:layoutItem>
+                    <lightning:layoutItem size="4" class="slds-p-around_medium">
+                        <div class="slds-p-around_large box slds-box">
+                            <label class="slds-form-element__label">Name on Card</label>
+                            <lightning:input type="text" required="true" value="{!v.ownName}" />
+                        </div>
+                    </lightning:layoutItem>
+                    <lightning:layoutItem size="4" class="slds-p-around_medium">
+                        <div class="slds-p-around_large box slds-box"> 
+                            <label class="slds-form-element__label">Email ID</label>
+                            <lightning:input type="text" required="true" value="{!v.email}"/>
+                        </div>
+                    </lightning:layoutItem>
+                    <lightning:layoutItem size="3" class="slds-p-around_medium">
+                        <div class="slds-p-around_large box slds-box"> 
+                            <label class="slds-form-element__label">Phone Number:</label>
+                            <lightning:input type="number" required="true" maxlength="10" value="{!v.mobile}"/>
+                        </div>
+                    </lightning:layoutItem>
+                    <lightning:layoutItem size="3" class="slds-p-around_medium">
+                        <div class="slds-p-around_large box slds-box"> 
+                            <label class="slds-form-element__label">Employement Type</label>
+                            <lightning:select name="emp" label="" required="true" value="{!v.empType}">
+                                <option value="">choose one...</option>
+                                <option value="Salaried">Salaried</option>
+                                <option value="Salaried Doctor">Salaried Doctor</option>
+                                <option value="Self Employed Business">Self Employed Business</option>
+                                <option value="Self Employed Professional">Self Employed Professional</option>
+                            </lightning:select>
+                        </div>
+                    </lightning:layoutItem>
+                    <lightning:layoutItem size="3" class="slds-p-around_medium">
+                        <div class="slds-p-around_large box slds-box"> 
+                            <label class="slds-form-element__label">Limit</label>
+                            <lightning:helptext content="Credit Card Limit you need" class="customIcon"/>
+                            <lightning:select name="lim" label="" value="{!v.limit}">
+                                <option value="50000">50000</option>
+                                <option value="70000">70000</option>
+                                <option value="100000">100000</option>
+                                <option value="120000">120000</option>
+                                <option value="150000">150000</option>
+                            </lightning:select>
+                        </div>
+                    </lightning:layoutItem>
+                    <lightning:layoutItem size="3" class="slds-p-around_medium">
+                        <div class="slds-p-around_large box slds-box"> 
+                            <label class="slds-form-element__label">Expected Date</label>
+                            <lightning:helptext content="If verification and other paperworks goes well you will recieve the card by" class="customIcon"/>
+                            <lightning:input disabled="true" type="date" value="{!v.confDate}"/>
+                        </div>
+                    </lightning:layoutItem>
+                    <lightning:layoutItem size="12">
+                        <div  class="slds-align_absolute-center">
+                            <lightning:button label="Submit" iconName="utility:save" iconPosition="left" variant="brand" onclick="{!c.handleSubmit}"/>
+                            <lightning:button label="Attach Files" iconName="utility:attach" iconPosition="left" variant="success" onclick="{!c.viewAttachment}"/>
+                        </div>
+                    </lightning:layoutItem>
+                </lightning:layout>
+            </div>
+            <lightning:spinner aura:id="spinner" variant="brand" size="medium"/>
+            <aura:set attribute="else">
+                <div class="slds-p-around_medium">
+                    <p>Your Reference Id is <b><u>{!v.returnedValue}</u></b></p>
+                    <br/><br/>
+                    <p>For any assistance kindly reach us via support !!!</p>
+                    <p>We will get back to you regarding status of your card soon, meanwhile if you have not uploaded your <b>Aadhar Card, Pan Card, Income Proof</b> , Please upload it soon for hassle free card generation!!!</p>
+                    <br/><br/>
+                    <p>To Upload required files, if <b>NOT</b> uploaded</p>
+                    <p>
+                        <lightning:fileUpload label="Attach Files"
+                                              name="fileUploader"
+                                              multiple="true"
+                                              accept="{!v.filetype}"
+                                              recordId="{!v.ownId}"
+                                              onuploadfinished="{!c.handleUploadFinished}" />
+                    </p>
+                </div>
+            </aura:set>
+        </aura:if>
+    </lightning:card>
+</aura:component>

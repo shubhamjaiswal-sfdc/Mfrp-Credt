@@ -1,0 +1,3 @@
+<aura:event type="COMPONENT" description="For capturing the product's Id which is being booked">
+    <aura:attribute name="product" type="Product2"/>
+</aura:event>

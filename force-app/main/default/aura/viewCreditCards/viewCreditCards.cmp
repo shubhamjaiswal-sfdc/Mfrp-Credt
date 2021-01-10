@@ -1,0 +1,54 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global"  controller="ProdAndTransController">
+    <aura:attribute name="cardVisible" type="boolean" default="false" />
+    <aura:attribute name="cardID" type="Id"/>
+    <aura:attribute name="cardNumber" type="String" />
+    <aura:attribute name="cardValue" type="Credit_Card__c"/>
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:if isTrue="{!v.cardVisible}" >
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <lightning:buttonIcon iconName="utility:close" onclick="{!c.closeModal}" alternativeText="close" variant="bare-inverse" class="slds-modal__close"/>
+                    <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Your Card Details</h2>
+                </header>
+                <lightning:card>
+                    <div class="card slds-align_absolute-center">
+                        <div class="card__front card__part">
+                            <img class="card__front-square card__square" src="https://image.ibb.co/cZeFjx/little_square.png" />
+                            <p class="card__front-logo card__logo" >{!v.cardValue.Bank_Name__r.Name}</p>
+                            <p class="card_numer">XXXX-XXXX-XXXX-{!v.cardNumber}</p>
+                            <div class="card__space-75">
+                                <span class="card__label">Card holder</span>
+                                <p class="card__info">{!v.cardValue.Card_Holder_Name__c}</p>
+                            </div>
+                            <div class="card__space-25">
+                                <span class="card__label">Expires</span>
+                                <p class="card__info">{!v.cardValue.Expiry_Date__c}</p>
+                            </div>
+                        </div>
+                        
+                        <div class="card__back card__part">
+                            <div class="card__black-line"></div>
+                            <div class="card__back-content">
+                                <div class="card__secret">
+                                    <p class="card__secret--last">{!v.cardValue.CVV__c}</p>
+                                </div>
+                                <img class="card__back-square card__square" src="https://image.ibb.co/cZeFjx/little_square.png" />
+                                <p class="card__back-logo card__logo" >{!v.cardValue.Bank_Name__r.Name}</p>
+                                
+                            </div>
+                        </div>
+                        <lightning:spinner aura:id="spinner" variant="brand" size="medium"/>
+                    </div>
+                    <footer class="slds-modal__footer">
+                        <lightning:button variant="neutral" 
+                                          label="Cancel"  
+                                          onclick="{!c.closeModal}"/>
+                    </footer>
+                </lightning:card>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </aura:if>
+</aura:component>

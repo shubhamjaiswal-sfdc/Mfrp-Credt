@@ -1,0 +1,27 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global"  controller="currentUserInfoApex">
+    <aura:attribute name="visible" type="boolean" default="false" />
+    <aura:attribute name="contactID" type="Id" />
+    <aura:attribute name="conPoints" type="String" />
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    
+    <div class="slds-card">
+        <div class="buttons slds-align_absolute-center">
+            <lightning:button onclick="{!c.handlePoints}">
+                <a class="btn effect01"><span>My CREDT Points</span></a>
+            </lightning:button>
+        </div>
+        <div class="slds-p-around_medium">
+            <aura:if isTrue="{!v.visible}">
+                 <lightning:icon iconName="action:fallback"/>
+                <p><lightning:formattedNumber value="{!v.conPoints}" /></p>
+                <br/><br/>
+                <h3 style="color: #f7f7f7;">**You can earn CREDT points through various ways i.e. Refer a friend and earn 50 points, Buy products from CREDT mart and earn 40 points per successful purchase etc.</h3>
+            </aura:if>
+        </div>
+    </div>
+    <lightning:spinner aura:id="spinner" variant="brand" size="medium"/>
+    
+    <aura:if isTrue="{!v.contactID}">
+        <c:rewardDetails contactID="{!v.contactID}" />
+    </aura:if>
+</aura:component>

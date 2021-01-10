@@ -1,0 +1,7 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global"  controller="ProdAndTransController">
+  <div class="slds-p-top_large">
+            <div class="loading">
+                <span>We Understand Your World</span>
+            </div>
+        </div>
+</aura:component>

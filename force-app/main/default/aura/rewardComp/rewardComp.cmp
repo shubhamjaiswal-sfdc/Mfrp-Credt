@@ -1,0 +1,24 @@
+<aura:component implements="flexipage:availableForAllPageTypes,force:hasRecordId,forceCommunity:availableForAllPageTypes" access="global" controller="ProdAndTransController">
+    <aura:attribute name="products" type="Product2[]"/>
+    <aura:attribute name="productId" type="Product2" />
+    <aura:attribute name="isOpen" type="boolean" default="false"/>
+    
+    <aura:handler name="bookProduct" event="c:fetchProductId" action="{!c.handleOrderProduct}"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <!--List of all Products-->
+    <lightning:card title="Rewards Section" iconName="standard:reward">
+        <div class="slds-grid">
+            <div class="slds-col scrollable-view slds-p-around_large">
+                <aura:iteration items="{!v.products}" var="productInfo">
+                    <div class="slds-col slds-size_12-of-12 slds-has-divider--bottom-space slds-p-bottom_medium">                     
+                        <c:eachReward product="{!productInfo}"/>
+                    </div>
+                </aura:iteration>
+            </div>
+        </div>
+        <aura:if isTrue="{!v.isOpen}">
+            <c:rewardCheckout productId="{!v.productId}" isOpen="{!v.isOpen}"/>
+        </aura:if>
+        <lightning:spinner aura:id="spinner" variant="brand" size="large"/>
+    </lightning:card>
+</aura:component>

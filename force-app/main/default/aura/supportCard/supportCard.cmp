@@ -1,0 +1,58 @@
+<aura:component implements="flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" controller="currentUserInfoApex">
+    <aura:attribute name="ownId" type="Id" />
+    <aura:attribute name="visible" type="boolean" default="true" />
+    <aura:attribute name="options" type="List" access="PRIVATE"/>
+    <aura:attribute name="selectedValue" type="String" access="PRIVATE"/>
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    
+    <lightning:card iconName="action:new_contact" title="How can we help you?">
+        <lightning:recordEditForm aura:id="myRecordForm" objectApiName="Case" onsubmit="{!c.handleSubmit}">
+            <div class=" slds-box slds-m-around_medium box">
+                <div class="slds-grid">
+                    <div class="slds-col slds-p-left_medium slds-p-top_large slds-size_2-of-5">
+                        <lightning:inputField fieldName="ContactId" value="{!v.ownId}" disabled="true"/>
+                    </div>
+                    <div class="slds-col slds-p-around_small slds-size_1-of-5"></div>
+                    <div class="slds-col slds-p-right_medium slds-size_2-of-5">
+                        <div class="slds-grid">
+                            <div class="slds-col slds-p-top_large slds-size_1-of-3">
+                                Problem on Card:
+                            </div>
+                            <div class="slds-col slds-p-bottom_large slds-size_2-of-3">
+                                <lightning:select name="paymentId" label="" aura:id="paymentId" value="{!v.selectedValue}">
+                                    <aura:iteration items="{!v.options}" var="option">
+                                        <option text="{!option.Name}" value="{!option.Id}" selected="{!option.selected}"/>
+                                    </aura:iteration>
+                                </lightning:select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="slds-grid">
+                    <div class="slds-col slds-p-left_medium slds-size_2-of-5">
+                        <lightning:inputField fieldName="Type" required="true" />
+                    </div>
+                    <div class="slds-col slds-p-around_small slds-size_1-of-5"></div>
+                    <div class="slds-col slds-p-right_medium slds-p-bottom_large slds-size_2-of-5">
+                        <lightning:inputField fieldName="Issue__c"  required="true"/>
+                    </div>
+                </div>
+                <div class="slds-grid">
+                    <div class="slds-col slds-p-left_medium slds-size_2-of-5">
+                        <lightning:inputField fieldName="Subject"  required="true"/>
+                    </div>
+                    <div class="slds-col slds-p-around_small slds-size_1-of-5"></div>
+                    <div class="slds-col slds-p-right_medium slds-p-bottom_large slds-size_2-of-5">
+                        <lightning:inputField fieldName="Description" />
+                    </div>
+                </div>
+                <div class=" slds-align_absolute-center">
+                    <aura:if isTrue="{!v.visible}">
+                        <lightning:button type="submit" variant="brand" label="Report" iconName="utility:report_issue" />
+                    </aura:if>
+                </div>
+            </div>
+        </lightning:recordEditForm>
+    </lightning:card>
+</aura:component>
